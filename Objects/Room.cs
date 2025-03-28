@@ -40,14 +40,14 @@ public class Room
         Exit theExit = this.getExit(direction);
         if(theExit != null)
         {
-            //remove the player from the current room
+            
             Core.thePlayer.getCurrentRoom().removePlayer();
 
-            //place them in the destination room in that direction
+            
             Room destinationRoom = theExit.getDestination();
             destinationRoom.setPlayer(Core.thePlayer);
             
-            //update the room the player is currently in so the room exits visually update
+            
             return true;
         }
         else

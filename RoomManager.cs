@@ -9,14 +9,15 @@ public class RoomManager : MonoBehaviour
 
     private Vector3 mmCurrPos;
 
-       void Start()
+    
+    void Start()
     {
-        Core.thePlayer = new Player("Mike");
         this.theDungeon = new Dungeon();
         this.setupRoom();
         this.mmCurrPos = Core.mmStartPos;
     }
 
+    
     private void resetRoom()
     {
         this.theDoors[0].SetActive(false);
@@ -25,7 +26,8 @@ public class RoomManager : MonoBehaviour
         this.theDoors[3].SetActive(false);
     }
 
-        private void setupRoom()
+    
+    private void setupRoom()
     {
         Room currentRoom = Core.thePlayer.getCurrentRoom();
         this.theDoors[0].SetActive(currentRoom.hasExit("north"));
@@ -40,7 +42,7 @@ public class RoomManager : MonoBehaviour
         bool didChangeRoom = false;
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
-           
+            
             didChangeRoom = Core.thePlayer.getCurrentRoom().tryToTakeExit("north");
             if(didChangeRoom)
             {
@@ -68,7 +70,7 @@ public class RoomManager : MonoBehaviour
         }
         else if(Input.GetKeyDown(KeyCode.RightArrow))
         {
-        
+            
             didChangeRoom = Core.thePlayer.getCurrentRoom().tryToTakeExit("east");
             if(didChangeRoom)
             {
@@ -97,7 +99,7 @@ public class RoomManager : MonoBehaviour
             }   
         }
 
-        
+       
         if(didChangeRoom)
         {
             this.setupRoom();
