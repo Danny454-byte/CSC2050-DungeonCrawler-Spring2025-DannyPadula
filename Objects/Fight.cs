@@ -14,7 +14,7 @@ public class Fight
     {
         this.theMonster = m;
 
-        
+        //initially determine who goes first
         int roll = Random.Range(0, 20) + 1;
         if (roll <= 10)
         {
@@ -31,6 +31,12 @@ public class Fight
 
     }
 
+    public bool isPlayerTurn()
+    {
+        return this.attacker is Player;
+    }
+
+
     public bool isFightOver()
     {
         return this.fightOver;
@@ -41,10 +47,10 @@ public class Fight
         int attackRoll = Random.Range(0, 20) + 1;
         Debug.Log("Attack Roll: " + attackRoll);
         Debug.Log("Defender AC: " + this.defender.getAC());
-        
+
         if(attackRoll >= this.defender.getAC())
         {
-        
+            //attacker hits the defender
             int damage = Random.Range(1, 6); //1 to 5 damage
             this.defender.takeDamage(damage);
 
@@ -54,16 +60,16 @@ public class Fight
                 Debug.Log(this.attacker.getName() + " killed " + this.defender.getName());
                 if(this.defender is Player)
                 {
-              
+                    //player died
                     Debug.Log("Player died");
-            
+                    //end the game
                     playerGameObject.SetActive(false); //hide the player
                 }
                 else
                 {
-                    
+                    //monster died
                     Debug.Log("Monster died");
-                    
+                    //remove the monster from the scene
                     GameObject.Destroy(monsterGameObject); //remove the monster from the scene
                 }
             }
@@ -80,6 +86,9 @@ public class Fight
 
     public void startFight(GameObject playerGameObject, GameObject monsterGameObject)
     {
+        //should have the attacker and defender fight each until one of them dies.
+        //the attacker and defender should alternate between each fight round and
+        //the one who goes first was determined in the constructor.
         while(true)
         {
             int attackRoll = Random.Range(0, 20) + 1;
